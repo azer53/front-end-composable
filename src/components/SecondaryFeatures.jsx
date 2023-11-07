@@ -186,7 +186,7 @@ function DeviceChartIcon(props) {
   )
 }
 
-export function SecondaryFeatures() {
+export function SecondaryFeatures({ items }) {
   return (
     <section
       id="secondary-features"
@@ -207,16 +207,15 @@ export function SecondaryFeatures() {
           role="list"
           className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-sm sm:mt-20 sm:grid-cols-2 md:gap-y-10 lg:max-w-none lg:grid-cols-3"
         >
-          {features.map((feature) => (
+          {items.map((item) => (
             <li
-              key={feature.name}
+              key={item.name}
               className="rounded-2xl border border-gray-200 p-8"
             >
-              <feature.icon className="h-8 w-8" />
               <h3 className="mt-6 font-semibold text-gray-900">
-                {feature.name}
+                {item.name}
               </h3>
-              <p className="mt-2 text-gray-700">{feature.description}</p>
+              <p className="mt-2 text-gray-700">{item.summary}</p>
             </li>
           ))}
         </ul>
