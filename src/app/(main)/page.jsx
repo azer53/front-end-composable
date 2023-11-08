@@ -27,34 +27,12 @@ const getAllData = gql`
         }
       }
     }
-    commercetools {
-      orders {
-        results {
-          totalPrice {
-            centAmount
-            currencyCode
-            fractionDigits
-          }
-          billingAddress {
-            streetName
-            streetNumber
-            postalCode
-            city
-            country
-          }
-          orderState
-          paymentState
-        }
-      }
-    }
   }
 `
 
 
 export default async function Home() {
-  const { contentful, commercetools } = await grafbase.request(getAllData)
-  console.log(contentful)
-  console.log(commercetools)
+  const { contentful } = await grafbase.request(getAllData)
 
   return (
     <>
