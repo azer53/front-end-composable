@@ -80,30 +80,28 @@ async function ProductList() {
                     Products
                 </h2>
 
-                <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-5 md:gap-y-8 lg:gap-x-12">
                     {commercetools.products.results.map((product) => (
-                        <a key={product.id} href={"/"} className="group">
-                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg sm:aspect-h-3 sm:aspect-w-2">
+                        <div key={product.id} className="group relative">
+                            <div className="h-56 w-full overflow-hidden rounded-md bg-white group-hover:opacity-75 lg:h-72 xl:h-80">
                                 <Image
                                     src={product.masterData.current.masterVariant.images[0].url}
                                     alt={product.masterData.current.masterVariant.images[0].url}
-                                    className="h-full w-full object-cover object-center group-hover:opacity-75"
-                                    height={500}
-                                    width={500}
-                                    quality={100}
+                                    layout="fill"
+                                    objectFit="contain"
                                 />
-     {/*                            <img
-                                    src={product.masterData.current.masterVariant.images[0].url}
-                                    alt={product.masterData.current.masterVariant.images[0].url}
-                                    className="h-full w-full object-cover object-center group-hover:opacity-75"
-                                /> */}
                             </div>
-                            <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
-                                <h3>{product.masterData.current.nameAllLocales[0].value}</h3>
+                            <h3 className="mt-4 text-sm text-gray-700">
+                                <a href={product.href}>
+                                    <span className="absolute inset-0" />
+                                    {product.masterData.current.nameAllLocales[0].value}
+                                </a>
+                            </h3>
+                            <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                            <div className="mt-1 text-sm font-medium text-gray-900">
                                 <PriceComponent totalPrice={product.masterData.current.masterVariant.prices[0].value} />
                             </div>
-                            <p className="mt-1 text-sm italic text-gray-500">{product.description}</p>
-                        </a>
+                        </div>
                     ))}
                 </div>
             </div>
