@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container } from '@/components/Container'
 import { gql, grafbase } from '../../lib/grafbase'
-import PriceComponent from './PriceComponent'
+import PriceComponent from '../../components/PriceComponent'
 
 import { Button } from '@/components/Button'
 
@@ -36,7 +36,6 @@ const getOrderHistory = gql`
 async function OrderHistoryTableCards() {
 
     const { commercetools } = await grafbase.request(getOrderHistory)
-    console.log(commercetools.orders.results)
 
     return (
         <section
