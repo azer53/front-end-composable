@@ -9,13 +9,41 @@ import { gql, grafbase } from '../../lib/grafbase'
 
 
 
-const GetContentfulData = gql`
-  query Contentful {
+const getAllData = gql`
+  query Homepage {
     contentful {
-      productCollection(limit: 6) {
+      tileCollection {
         items {
-          name
-          summary
+          title
+          link
+        }
+      }
+      faqCollection {
+        items {
+          question
+          answer {
+            json
+          }
+        }
+      }
+    }
+    commercetools {
+      orders {
+        results {
+          totalPrice {
+            centAmount
+            currencyCode
+            fractionDigits
+          }
+          billingAddress {
+            streetName
+            streetNumber
+            postalCode
+            city
+            country
+          }
+          orderState
+          paymentState
         }
       }
     }
@@ -24,17 +52,19 @@ const GetContentfulData = gql`
 
 
 export default async function Home() {
-  const { contentful } = await grafbase.request(GetContentfulData)
+  const { contentful, commercetools } = await grafbase.request(getAllData)
+  console.log(contentful)
+  console.log(commercetools)
 
   return (
     <>
-{/*       <Hero />
+      {/*       <Hero />
       <PrimaryFeatures /> */}
-      <SecondaryFeatures items={contentful.productCollection.items} />
+      <SecondaryFeatures items={contentful.tileCollection.items} />
       <CallToAction />
-{/*       <Reviews />
+      {/*       <Reviews />
       <Pricing /> */}
-      <Faqs />
+      <Faqs questions={contentful.faqCollection.items}/>
     </>
   )
 }

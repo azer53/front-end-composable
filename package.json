@@ -10,6 +10,7 @@
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.19.0",
     "@headlessui/react": "^1.7.15",
     "@headlessui/tailwindcss": "^0.2.0",
     "@tailwindcss/forms": "^0.5.3",
