@@ -5,8 +5,6 @@ import PriceComponent from '../../components/PriceComponent'
 
 import { Button } from '@/components/Button'
 
-
-
 const getOrderHistory = gql`
   query OrderHistory {
     commercetools {
