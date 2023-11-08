@@ -1,4 +1,6 @@
 import { Container } from '@/components/Container'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+
 
 const faqs = [
   [
@@ -54,7 +56,8 @@ const faqs = [
   ],
 ]
 
-export function Faqs() {
+export function Faqs({ questions }) {
+  console.log(questions[0].answer.json.content[0].content[0].value)
   return (
     <section
       id="faqs"
@@ -84,20 +87,16 @@ export function Faqs() {
           role="list"
           className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 sm:mt-20 lg:max-w-none lg:grid-cols-3"
         >
-          {faqs.map((column, columnIndex) => (
-            <li key={columnIndex}>
-              <ul role="list" className="space-y-10">
-                {column.map((faq, faqIndex) => (
-                  <li key={faqIndex}>
-                    <h3 className="text-lg font-semibold leading-6 text-gray-900">
-                      {faq.question}
-                    </h3>
-                    <p className="mt-4 text-sm text-gray-700">{faq.answer}</p>
-                  </li>
-                ))}
-              </ul>
-            </li>
-          ))}
+          <ul role="list" className="space-y-10">
+            {questions.map((faq) => (
+              <li key={faq.question}>
+                <h3 className="text-lg font-semibold leading-6 text-gray-900">
+                  {faq.question}
+                </h3>
+                <p className="mt-4 text-sm text-gray-700">{faq.answer.json.content[0].content[0].value}</p>
+              </li>
+            ))}
+          </ul>
         </ul>
       </Container>
     </section>
